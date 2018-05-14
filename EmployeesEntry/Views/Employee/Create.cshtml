@@ -1,0 +1,199 @@
+﻿@model EmployeesEntry.Models.Employee
+
+@{
+    ViewBag.Title = "Create";
+}
+<link href="~/jQueryUI/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/style.css" rel="stylesheet" />
+<div class="EmployeeEntry-card" style="width:80%">
+
+
+
+
+
+
+    <div style="text-align:center">
+        <h2>Create Employee</h2>
+        @if (ViewBag.UpdatedMsg != null)
+        {
+
+            <div class="alert alert-success">@ViewBag.UpdatedMsg</div>
+        }
+        else if (ViewBag.SavedMsg != null)
+        {
+
+            <div class="alert alert-success">@ViewBag.SavedMsg</div>
+        }
+    </div>
+
+    <div style="position:relative;left:20%">
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal" ng-app="Homeapp" ng-controller="EmployeeController">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EmployeeName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EmployeeName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PresentAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.PresentAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PresentAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ParmanentAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.ParmanentAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ParmanentAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LocationId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("LocationId", null, "Select .....", htmlAttributes: new { @class = "form-control ", id = "LocationDroDwn" })
+                        @Html.ValidationMessageFor(model => model.LocationId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PositionId, htmlAttributes: new { @class = "control-label col-md-2 " })
+                    <div class="col-md-10">
+                        @Html.DropDownList("PositionId", null, "Select .....", htmlAttributes: new { @class = "form-control ", id = "PositionDroDwn" })
+                        @Html.ValidationMessageFor(model => model.PositionId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CurrentSalary, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CurrentSalary, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CurrentSalary, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="radio-inline">
+
+                            @Html.RadioButton("gender", "Male") Male
+
+                        </div>
+
+                        <div class="radio-inline">
+
+                            @Html.RadioButton("gender", "Female") Female
+
+                        </div>
+
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsUserOfSystem, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsUserOfSystem)
+                            @Html.ValidationMessageFor(model => model.IsUserOfSystem, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaritalStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        @Html.DropDownListFor(model => model.MaritalStatus,
+
+
+ new List<SelectListItem> { new SelectListItem { Text = "Unmarried", Value = "Unmarried" }, new SelectListItem { Text = "Married", Value = "Married" } }, "Select ......", new { id = "MtsDroDwn", @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.MaritalStatus, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.JoiningDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.JoiningDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.JoiningDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Save</button>
+                        &nbsp;
+                        <a href='@Url.Action("Index","Employee")' class="btn btn-primary"><i class="glyphicon glyphicon-file"></i> Show</a>
+                        &nbsp;
+                        <button type="button" class="btn btn-danger" ng-click='deleterecord(@Request.QueryString["empId"])'><i class="glyphicon glyphicon-trash"></i> Remove</button>&nbsp;
+                        <button type="button" class="btn btn-warning" ng-click="reload()"><i class="glyphicon glyphicon-remove"></i> Clear</button>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<script src="~/jQueryUI/jquery.js"></script>
+<script src="~/jQueryUI/jquery-ui.js"></script>
+<script src="~/Scripts/CustomScript.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#PositionDroDwn option").prop('selected', false).filter(function () {
+    return $(this).val() == @ViewBag.pid;
+}).prop('selected', true);
+        $("#LocationDroDwn option").prop('selected', false).filter(function () {
+            return $(this).val() == @ViewBag.lid;
+        }).prop('selected', true);
+        $("#MtsDroDwn option").filter(function () {
+            return $(this).text() == @ViewBag.mts;
+        }).prop('selected', true);
+       
+    </script>
+}

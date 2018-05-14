@@ -1,0 +1,40 @@
+﻿@model IEnumerable<EmployeesEntry.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div ng-app="Homeapp" ng-controller="EmployeeController">
+    [<a href='@Url.Action("Create")'>Back</a>]<br />
+    <table class="tableData table table-bordered">
+        <tr>
+            <th>Employee Name</th>
+            <th>Location</th>
+            <th>Phone Number</th>
+            <th>Action</th>
+
+        </tr>
+        <tr ng-repeat="e in record" ng-class-even="'even'" ng-class-odd="'odd'">
+            <td>{{e.EmployeeName}}</td>
+            <td>{{e.LocationName}}</td>
+            <td>{{e.Phone}}</td>
+
+            <td>
+                [<a href="/Employee/Create?EmpId={{e.EmployeeId}}&lid={{e.LocationId}}&pid={{e.PositionId}}&mts={{e.MaritalStatus}}">Select</a>]
+            </td>
+
+        </tr>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+}
+
+
+
